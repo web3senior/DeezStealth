@@ -1,0 +1,29 @@
+.section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+  min-height: 100dvh;
+  min-height: 100vh;
+  background-color: var(--primary-color);
+  
+  &:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("./../assets/bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    text-transform: uppercase;
+  }
+
+  figure {
+    img {
+      width: 160px;
+    }
+  }
+}

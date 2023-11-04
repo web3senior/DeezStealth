@@ -1,0 +1,129 @@
+.loading {
+  background-color: var(--primary-color);
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8rem;
+  row-gap: 0.5rem;
+
+  span {
+    --r: 60px;
+    width: var(--r);
+    height: var(--r);
+    background-image: url('./../../assets/pizza-slice.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    background-position: left;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-duration: 1.4s;
+
+    &:nth-child(1) {
+      right: calc(50% - var(--r) + 4px);
+      top: 50%;
+      animation-name: right-piece;
+    }
+
+    &:nth-child(2) {
+      right: calc(50%);
+      top: 50%;
+      animation-name: left-piece;
+    }
+
+    &:nth-child(3) {
+      right: calc(50% - var(--r) / 2 + 2px);
+      top: calc(50% - var(--r) / 2 + 2px);
+      animation-name: top-piece;
+    }
+
+    &:nth-child(4) {
+      right: calc(50% - var(--r) / 2 + 2px);
+      top: calc(50% + var(--r) / 2 - 2px);
+      animation-name: bottom-piece;
+    }
+  }
+}
+
+// Pizza slice
+@keyframes top-piece {
+  0% {
+    transform: translateY(0) rotate(-90deg);
+  }
+  20% {
+    transform: translateY(-10px) rotate(-90deg);
+  }
+  40% {
+    transform: translateY(0) rotate(-90deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-90deg);
+  }
+}
+
+@keyframes right-piece {
+  0% {
+    transform: translateX(0) rotate(360deg);
+  }
+  20% {
+    transform: translateY(0) rotate(360deg);
+  }
+  40% {
+    transform: translateX(10px) rotate(360deg);
+  }
+  60% {
+    transform: translateX(0) rotate(360deg);
+  }
+  100% {
+    transform: translateX(0) rotate(360deg);
+  }
+}
+
+@keyframes bottom-piece {
+  0% {
+    transform: translateY(0) rotate(90deg);
+  }
+  40% {
+    transform: translateY(0) rotate(90deg);
+  }
+  60% {
+    transform: translateY(10px) rotate(90deg);
+  }
+  80% {
+    transform: translateX(0) rotate(90deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+
+@keyframes left-piece {
+  0% {
+    transform: translateX(0) rotate(180deg);
+  }
+  60% {
+    transform: translateY(0) rotate(180deg);
+  }
+  80% {
+    transform: translateX(-10px) rotate(180deg);
+  }
+  100% {
+    transform: translateX(0) rotate(180deg);
+  }
+}
+
+// Spinner
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

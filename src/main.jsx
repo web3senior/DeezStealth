@@ -1,13 +1,14 @@
 import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { MetaMaskUIProvider } from '@metamask/sdk-react-ui'
 import { AuthProvider } from './contexts/AuthContext'
 import './index.scss'
 import './styles/global.scss'
 
 import ErrorPage from './error-page'
 const Root = lazy(() => import('./routes/root'))
-const Layout = lazy(() => import('./routes/layout'))
+const UserRoot = lazy(() => import('./routes/userRoot'))
 import SplashScreen from './routes/splashScreen.jsx'
 import Welcome from './routes/welcome.jsx'
 import Home, { loader as homeLoader } from './routes/home.jsx'
@@ -56,11 +57,20 @@ const router = createBrowserRouter([
   {
     path: 'user',
     element: (
-      <AuthProvider>
+
       <Suspense fallback={<Loading />}>
-        <Layout />
+      <MetaMaskUIProvider sdkOptions={{
+        dappMetadata: {
+          name: 'React Demo Button',
+          url: 'http://reactdemobutton.localhost'
+        },
+        checkInstallationImmediately: false
+      }}
+      >
+        <UserRoot />
+            </MetaMaskUIProvider>
       </Suspense>
-      </AuthProvider>
+
     ),
     errorElement: <ErrorPage />,
     children: [

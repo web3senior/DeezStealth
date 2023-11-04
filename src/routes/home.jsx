@@ -1,7 +1,6 @@
 import { useState, Suspense } from 'react'
 import { useLoaderData, defer, Await } from 'react-router-dom'
 import Loading from './components/LoadingSpinner'
-import { getCategory, getFood } from '../util/api'
 import toast from 'react-hot-toast'
 import { Title } from './helper/DocumentTitle'
 import styles from './Home.module.scss'

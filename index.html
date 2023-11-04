@@ -4,10 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>%VITE_TITLE%</title>
+    <meta name="description" content="%VITE_DESCRIPTION%" />
+    <meta name="keywords" content="%VITE_KEYWORDS%" />
+    <meta name="author" content="%VITE_AUTHOR%" />
+
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        addEventListener('load', async () => {
+          navigator.serviceWorker
+            .register('./sw.js')
+            .then((registration) => {
+              console.log('Hooray. Registration successful, scope is:', registration.scope)
+            })
+            .catch((error) => {
+              console.warn('Whoops. Service worker registration failed, error:', error)
+            })
+        })
+      }
+    </script>
   </body>
 </html>

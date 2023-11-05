@@ -1,0 +1,11 @@
+{
+  "name": "Perperook",
+  "short_name": "Perperook",
+  "icons": [
+  ],
+  "theme_color": "#E70B27",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "./",
+  "scope": "."
+}

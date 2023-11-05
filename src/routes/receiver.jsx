@@ -1,13 +1,37 @@
-import { useState } from 'react'
+import { useEffect, useState, Fragment } from 'react'
+import { ethers } from 'ethers'
 import { Title } from './helper/DocumentTitle'
 import styles from './Sender.module.scss'
 import { getStealthPrivateKey } from '../util/stealth'
+import abi from '../abi/DeezStealth'
 
 export default function Receiver({ title }) {
   Title(title)
 
+  const [publicKeyInput, setPublicKeyInput] = useState('')
+  const [publicKey, setPublicKey] = useState('')
   const [privateKey, setPrivateKey] = useState('')
   const [sharedSecret, setSharedSecret] = useState('')
+
+  let contract = null
+
+  useEffect(() => {
+    if (contract === null) {
+      // TODO tmp
+      const provider = new ethers.BrowserProvider(window.ethereum)
+      provider.getSigner().then(signer => {
+        const contractAddress = '0xF9223Ba23C6381b30405Ec6D72717E3294AC848e' // TODO extract from here
+        contract = new ethers.Contract(contractAddress, abi, provider)
+
+        // TODO
+        contract.pubKey(signer.address).then(pubKey => {
+          if (pubKey.length > 2) {
+            setPublicKey(pubKey)
+          }
+        })
+      })
+    }
+  }, [])
 
   const handleGenerate = async () => {
     // TODO validation
@@ -15,6 +39,14 @@ export default function Receiver({ title }) {
       alert('Invalid inputs')
     }
     alert(getStealthPrivateKey(privateKey, sharedSecret))
+  }
+
+  const handleSubmitPubKey = async () => {
+    alert("TODO")
+  }
+
+  const handleRemovePubKey = async () => {
+    alert("TODO")
   }
 
   return (
@@ -28,14 +60,21 @@ export default function Receiver({ title }) {
             <p><button onClick={handleGenerate}>Generate</button></p>
             <p>&nbsp;</p>
 
-            <h3>Set Public Key</h3>
-            <p><input type="text" placeholder="Public Key or Private Key" /></p>
-            <p><button>Submit</button></p>
-            <p>&nbsp;</p>
-
-            <h3>Public Key</h3>
-            <p>0x048bd96eb2adfbe720d300786d72b8a63d1bfea... [copy]</p>
-            <p><button>Remove</button></p>
+            {publicKey === '' ? (
+              <Fragment>
+                <h3>Set Public Key</h3>
+                <p><b>TODO Support private key too to derive public key from it</b></p>
+                <p><input type="text" placeholder="Public Key" value={publicKeyInput} onChange={e => setPublicKeyInput(e.target.value)} /></p>
+                <p><button onClick={handleSubmitPubKey}>Submit</button></p>
+                <p>&nbsp;</p>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <h3>Public Key</h3>
+                <p>{publicKey} [copy]</p>
+                <p><button onClick={handleRemovePubKey}>Remove</button></p>
+              </Fragment>
+            )}
           </div>
         </div>
       </div>

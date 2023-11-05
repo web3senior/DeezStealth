@@ -9,8 +9,8 @@ import ErrorPage from './error-page'
 const Root = lazy(() => import('./routes/root'))
 const UserRoot = lazy(() => import('./routes/userRoot'))
 import SplashScreen from './routes/splashScreen.jsx'
-import Welcome, { loader as welcomeLoader } from './routes/welcome.jsx'
-import Dashboard, { loader as dashboardLoader } from './routes/dashboard.jsx'
+import Welcome from './routes/welcome.jsx'
+import Dashboard from './routes/dashboard.jsx'
 import About from './routes/about.jsx'
 import Sender from './routes/sender.jsx'
 import Receiver from './routes/receiver.jsx'
@@ -66,17 +66,7 @@ const router = createBrowserRouter([
     path: 'user',
     element: (
       <Suspense fallback={<Loading />}>
-        <MetaMaskUIProvider
-          sdkOptions={{
-            dappMetadata: {
-              name: 'DeezStealth Dapp',
-              url: document.url,
-            },
-            checkInstallationImmediately: false,
-          }}
-        >
-          <UserRoot />
-        </MetaMaskUIProvider>
+        <UserRoot />
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -86,7 +76,6 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: dashboardLoader,
             element: <Dashboard to={`dashboard`} />,
           },
           {
@@ -105,8 +94,4 @@ const router = createBrowserRouter([
   },
 ])
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-    <RouterProvider router={router} />
-  // </React.StrictMode>
-)
+ReactDOM.createRoot(document.getElementById('root')).render(<RouterProvider router={router} />)

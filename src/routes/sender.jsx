@@ -211,7 +211,7 @@ export default function Sender({ title }) {
                     {!isETH && (
                       <Fragment>
                         <p>
-                          <input value={token} onChange={e => setToken(e.target.value)} type="text" placeholder="Token" />
+                          <input value={token} onChange={e => setToken(e.target.value)} type="text" placeholder="Token Address" />
                         </p>
                         <p><input value={gasPassAmount} onChange={e => setGasPassAmount(e.target.value)} type="text" placeholder="Gas Pass Amount" /></p>
                       </Fragment>

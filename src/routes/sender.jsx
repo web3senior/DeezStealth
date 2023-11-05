@@ -3,17 +3,13 @@ import { ethers } from 'ethers'
 import { FileUploader } from 'react-drag-drop-files'
 import { Title } from './helper/DocumentTitle'
 import styles from './Sender.module.scss'
-import { getStealthAddress } from '../util/stealth'
+import { generateRandomSecret, getStealthAddress } from '../util/stealth'
 import abi from '../abi/DeezStealth'
 import erc20ABI from '../abi/ERC20'
 
 const fileTypes = ['CSV']
 
 const contractAddress = '0x04eAC8cd77aE31c4Eb22C6Eb6cECac0A58e544fB' // TODO extract from here
-
-// const secret = crypto.randomBytes(secretLength).toString('hex')
-// TODO crypto package is deprecated & seems that built-in crypto is not available in our build as well
-const secret = 'abcdef12435' // TODO generate new unique one for each address?
 
 export default function Sender({ title }) {
   Title(title)
@@ -25,6 +21,7 @@ export default function Sender({ title }) {
   const [file, setFile] = useState(null)
   const [receivers, setReceivers] = useState([])
   const [isReadyToDistribute, setIsReadyToDistribute] = useState(false)
+  const [isDistributing, setIsDistributing] = useState(false)
 
   const [isETH, setIsETH] = useState(true)
   const [token, setToken] = useState('')
@@ -56,6 +53,7 @@ export default function Sender({ title }) {
     console.log('Addresses', addresses)
 
     const pubKeys = await contract.getPubKeys(addresses)
+    const secret = generateRandomSecret(32)
     pubKeys.forEach((pubKey, i) => {
       if (pubKey === '0x') {
         return // skip
@@ -91,6 +89,7 @@ export default function Sender({ title }) {
     const gasPassAmounts = isETH || !gasPassAmount ? [] : [ethers.parseEther(gasPassAmount)]
 
     setIsReadyToDistribute(false)
+    setIsDistributing(true)
 
     let amounts
     if (!isETH) {
@@ -111,25 +110,49 @@ export default function Sender({ title }) {
     console.log('amounts', amounts)
     console.log('gasPassAmounts', gasPassAmounts)
     console.log('value', value)
-    const tx = await contract.distribute(addresses, _token, amounts, gasPassAmounts, {
-      gasLimit: 10000000, // TODO
-      value
-    })
-    console.log('TX', tx)
-    const receipt = await tx.wait()
-    console.log('RECEIPT', receipt)
-    alert('TX HASH ' + tx.hash)
-    setIsReadyToDistribute(true)
+    try {
+      const tx = await contract.distribute(addresses, _token, amounts, gasPassAmounts, {
+        gasLimit: 10000000, // TODO
+        value
+      })
+      console.log('TX', tx)
+      const receipt = await tx.wait()
+      console.log('RECEIPT', receipt)
+      alert('TX HASH ' + tx.hash)
+      setIsReadyToDistribute(true)
+      setIsDistributing(false)
+    } catch (e) {
+      setIsReadyToDistribute(true)
+      setIsDistributing(false)
+      // TODO
+      return
+    }
   }
 
   const handleReset = () => {
     setFile(null)
     setReceivers(null)
     setIsReadyToDistribute(false)
+    setIsDistributing(false)
     setToken('')
     setAmount('')
     setGasPassAmount('')
     setIsETH(true)
+  }
+
+  const handleExport = () => {
+    let csvContent = "Address,Public Key,Stealth Address,Shared Secret"
+    
+    receivers.forEach(r => {
+      csvContent += "\n" + r.address + ',' + r.pubKey + ',' + r.stealthAddress + ',' + r.sharedSecret
+    })
+
+    const blob = new Blob([csvContent], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'stealth.csv'
+    a.click()
   }
 
   return (
@@ -151,7 +174,10 @@ export default function Sender({ title }) {
                 {receivers.length === 0 ? (
                   <p><b>No public keys found to distribute.</b></p>
                 ) : (
-                  <p><b>{receivers.length} public keys found to distribute</b></p>
+                  <Fragment>
+                    <p><b>{receivers.length} public keys found to distribute</b></p>
+                    <p><button onClick={handleExport}>🥷 Export stealth CSV</button></p>
+                  </Fragment>
                 )}
 
                 <p><br /><input type="checkbox" defaultChecked={isETH} onClick={() => setIsETH(!isETH)} /> Distribute Ethereum<br /><br /></p>
@@ -166,9 +192,11 @@ export default function Sender({ title }) {
                       </Fragment>
                     )}
                     <p>
-                      <br/>
+                      <br />
                       <button onClick={handleReset}>Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <button onClick={handleDistribute} type="submit" disabled={!isReadyToDistribute}>Distribute</button>
+                      <button onClick={handleDistribute} type="submit" disabled={!isReadyToDistribute}>
+                        {isDistributing ? 'Distributing...' : 'Distribute'}
+                      </button>
                     </p>
                   </Fragment>
                 )}

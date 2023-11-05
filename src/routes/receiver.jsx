@@ -43,14 +43,16 @@ export default function Receiver({ title }) {
     if (privateKey.length === 0 || sharedSecret.length === 0) {
       alert('Invalid inputs')
     }
-    alert(getStealthPrivateKey(privateKey, sharedSecret))
+    const stealthPrivateKey = getStealthPrivateKey(privateKey, sharedSecret)
+    const wallet = new ethers.Wallet(stealthPrivateKey)
+    alert("Your private key: " + stealthPrivateKey + "\n\nYour stealth address: " + wallet.address)
   }
 
   const handleSubmitPubKey = async () => {
     let _pubKey = publicKeyInput
-    if (publicKeyInput.substring(0, 2) !== '0x') {
-      _pubKey = '0x' + publicKeyInput
-    }
+    // if (publicKeyInput.substring(0, 2) !== '0x') {
+    //   _pubKey = '0x' + publicKeyInput
+    // }
     // TODO try to add 0x prefix?
     if (ethers.isHexString(_pubKey, 32)) { // is valid private key?
       const wallet = new ethers.Wallet(_pubKey)
@@ -63,8 +65,14 @@ export default function Receiver({ title }) {
       }
     }
     setIsSubmitting(true)
-    const tx = await contract.setPubKey(_pubKey)
-    await tx.wait()
+    try {
+      const tx = await contract.setPubKey(_pubKey)
+      await tx.wait()
+    } catch (e) {
+      // TODO
+      setIsSubmitting(false)
+      return
+    }
     // TODO check if no errors
     setPublicKey(_pubKey)
     setIsSubmitting(false)
@@ -72,8 +80,14 @@ export default function Receiver({ title }) {
 
   const handleRemovePubKey = async () => {
     setIsRemoving(true)
-    const tx = await contract.removePubKey()
-    await tx.wait()
+    try {
+      const tx = await contract.removePubKey()
+      await tx.wait()
+    } catch (e) {
+      // TODO
+      setIsRemoving(false)
+      return
+    }
     // TODO check if no errors
     setPublicKey('')
     setIsRemoving(true)
@@ -94,7 +108,7 @@ export default function Receiver({ title }) {
                 {publicKey === '' ? (
                   <Fragment>
                     <h3>Save Public Key</h3>
-                    <p><input type="text" placeholder="Public Key or Private Key" value={publicKeyInput} onChange={e => setPublicKeyInput(e.target.value)} /></p>
+                    <p><input type="text" placeholder="Public Key or Private Key starting with 0x" value={publicKeyInput} onChange={e => setPublicKeyInput(e.target.value)} /></p>
                     <p><button onClick={handleSubmitPubKey} disabled={isSubmitting}>{isSubmitting ? 'Submitting...' : 'Submit'}</button></p>
                     <p>&nbsp;</p>
                   </Fragment>
@@ -110,8 +124,8 @@ export default function Receiver({ title }) {
 
             <p>&nbsp;</p>
             <h3>Generate Stealth Private Key</h3>
-            <p><input type="text" placeholder="Shared Secret" value={sharedSecret} onChange={e => setSharedSecret(e.target.value)} /></p>
-            <p><input type="password" placeholder="Private Key" value={privateKey} onChange={e => setPrivateKey(e.target.value)} /></p>
+            <p><input type="text" placeholder="Shared Secret starting with 0x" value={sharedSecret} onChange={e => setSharedSecret(e.target.value)} /></p>
+            <p><input type="text" placeholder="Private Key starting with 0x" value={privateKey} onChange={e => setPrivateKey(e.target.value)} /></p>
             <p><button onClick={handleGenerate}>Generate</button></p>
           </div>
         </div>

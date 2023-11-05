@@ -5,6 +5,7 @@ import BorisAvatar from './../assets/boris.png'
 import TantodefiAvatar from './../assets/tantodefi.jpeg'
 import AmirAvatar from './../assets/amir.png'
 import GitHubIcon from './../assets/github.svg'
+import { PopupButton } from '@typeform/embed-react'
 
 const data = [
   {
@@ -18,10 +19,6 @@ const data = [
   {
     q: 'What Networks does it support?',
     a: 'Receivers can choose to withdraw their funds on any EVM compatible chain. The DeezStealth smart contract is deployed on both Linea Goerli Testnet and Linea Mainnet Blockchains.',
-  },
-  {
-    q: 'Have Feedback?',
-    a: 'Got a feature request or a found a bug in our dApp, submit this {<a>typeform</a>}',
   },
 ]
 
@@ -73,7 +70,7 @@ export default function About({ title }) {
               {data.map((item, i) => {
                 return (
                   <li key={i}>
-                    <details open={i === 0 ? true : false} className="ms-depth-4 text-justify">
+                    <details open={i === 0 ? true : false} className="ms-depth-4">
                       <summary>{item.q}</summary>
                       <div>{item.a}</div>
                     </details>
@@ -81,6 +78,10 @@ export default function About({ title }) {
                 )
               })}
             </ul>
+            <p>Got a feature request or found a bug?</p>
+            <PopupButton id="NELvlnrQ" style={{ fontSize: 20 }} className="my-button text-justify">
+      Provide Feedback
+    </PopupButton>
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Title } from './helper/DocumentTitle'
-import perperookImage from './../assets/logo.png'
 import styles from './Welcome.module.scss'
+import DeezStealthSVG from './components/DeezStealthSVG.jsx'
 
 function Welcome({ title }) {
   Title(title)
@@ -9,8 +9,8 @@ function Welcome({ title }) {
 
   return (
     <section className={styles.section}>
-      <figure>
-        <img src={perperookImage} style={{ width: '240px' }} />
+      <figure style={{ width: '240px' }}>
+        <DeezStealthSVG />
         <figcaption>{import.meta.env.VITE_TITLE}</figcaption>
       </figure>
       <div>

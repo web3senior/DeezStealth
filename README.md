@@ -1,6 +1,5 @@
 # TODOs
 
-- fix ninja svg quality
 - fix darkmode colours
 - only show metamask connect button on /user routes
 - only allow access to /user routes if wallet is connected
@@ -52,7 +51,12 @@ run app:
 - [react-drag-and-drop](https://www.npmjs.com/package/react-drag-drop-files)
 - [SASS](https://github.com/sass/sass)
 
+### Built By
+
+- [web3senior](https://github.com/web3senior)
+- [bshevchenko](https://github.com/bshevchenko)
+- [tantodefi](https://github.com/tantodefi)
+
 ### Special Thanks
 
 A special thanks to [devorsmth.eth](https://app.buidlguidl.com/builders/0x02d09E69e528d7DA14F32Cd21b55aFFa1FF7F873) and his build [stAdds](https://stadds.vercel.app/) which served as the inspiration for our dapp and to learn about EIP-5664
-

@@ -9,32 +9,23 @@ import ErrorPage from './error-page'
 const Root = lazy(() => import('./routes/root'))
 const UserRoot = lazy(() => import('./routes/userRoot'))
 import SplashScreen from './routes/splashScreen.jsx'
-import Welcome, {loader as welcomeLoader} from './routes/welcome.jsx'
-import Home, { loader as homeLoader } from './routes/home.jsx'
-import About from './routes/about.jsx'
+import Welcome, { loader as welcomeLoader } from './routes/welcome.jsx'
 import Dashboard, { loader as dashboardLoader } from './routes/dashboard.jsx'
+import About from './routes/about.jsx'
 import Sender from './routes/sender.jsx'
 import Receiver from './routes/receiver.jsx'
 import Loading from './routes/components/LoadingSpinner'
 
-console.log(`%c ⟠`,'color:#2bb18b;font-size:8rem')
+// Dev Message
+console.clear()
+console.log(`%c ⟠`, 'color:#2bb18b;font-size:8rem')
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <Suspense fallback={<Loading />}>
-        <MetaMaskUIProvider
-          sdkOptions={{
-            dappMetadata: {
-              name: 'DeezStealth Dapp',
-              url: document.url,
-            },
-            checkInstallationImmediately: false,
-          }}
-        >
-          <Root />
-        </MetaMaskUIProvider>
+        <Root />
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -45,7 +36,21 @@ const router = createBrowserRouter([
       },
       {
         path: 'welcome',
-        element: <Welcome title={`welcome`} />,
+        element: (
+          <>
+            <MetaMaskUIProvider
+              sdkOptions={{
+                dappMetadata: {
+                  name: 'DeezStealth Dapp',
+                  url: document.url,
+                },
+                checkInstallationImmediately: false,
+              }}
+            >
+              <Welcome title={`welcome`} />
+            </MetaMaskUIProvider>
+          </>
+        ),
       },
       {
         path: 'about',
@@ -54,7 +59,7 @@ const router = createBrowserRouter([
       {
         path: 'setting',
         element: <></>,
-      }
+      },
     ],
   },
   {

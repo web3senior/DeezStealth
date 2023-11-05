@@ -1,12 +1,42 @@
 .loading {
-  background-color: var(--primary-color);
   position: fixed;
   inset: 0;
   z-index: 999;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  padding: 0 8rem;
   row-gap: 0.5rem;
+
+  span {
+    &:first-child {
+      box-sizing: border-box;
+      border-radius: 50%;
+      border-width: 1.5px;
+      border-style: solid;
+      border-color: var(--secondary-color) rgb(76 229 177 / 25%) rgb(76 229 177 / 25%);
+      border-image: initial;
+      animation-name: spinner;
+      animation-duration: 1.3s;
+      animation-iteration-count: infinite;
+      animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67);
+      width: 20px;
+      height: 20px;
+    }
+
+    &:last-child {
+      font-size: 0.9em;
+      color: var(--secondary-color);
+    }
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

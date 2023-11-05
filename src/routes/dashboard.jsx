@@ -1,9 +1,10 @@
-import { Suspense, useState, useEffect } from 'react'
-import { useLoaderData, defer, Await, Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useLoaderData, defer } from 'react-router-dom'
 import { Title } from './helper/DocumentTitle'
-import { getTokens, getCoin } from './../util/decommas'
-import styles from './About.module.scss'
+import { getTokens, getTransaction } from './../util/decommas'
+import styles from './Dashboard.module.scss'
 import Loading from './../routes/components/LoadingSpinner'
+import DefaultIcon from './../assets/default-token-icon.png'
 
 export const loader = async () => {
   return defer({
@@ -15,59 +16,47 @@ export const loader = async () => {
 export default function Dashboard({ title }) {
   Title(title)
   const [loaderData, setLoaderData] = useState(useLoaderData())
-  const [error, setError] = useState()
-  const [isLoading, setIsLoading] = useState()
-  const [tokens, setTokens] = useState([])
-  const [coin, setCoin] = useState([])
-
-  const getWalletAddress = async () => {
-    return await window.ethereum.request({ method: 'eth_requestAccounts' })
-  }
+  const [ERC20tokens, setERC20tokens] = useState([])
+  const [transaction, setTransaction] = useState([])
 
   useEffect(() => {
     window.ethereum.on('chainChanged', () => window.location.reload())
+    let userWalletAddress = loaderData.accounts[0]
 
-    // After reading user's wallet
-    getWalletAddress().then((address) => {
-      getTokens(address[0]).then((res) => {
-        console.log('Tokens => ', res)
-        setTokens(res.result)
-      })
-
-
+    getTokens(userWalletAddress).then((res) => {
+      console.log('Tokens => ', res)
+      setERC20tokens(res.result)
     })
+
+    // getTransaction(userWalletAddress).then((res) => {
+    //   console.log('Transaction => ', res)
+    //   setTransaction(res)
+    // })
   }, [])
 
   return (
     <section className={styles.section}>
       <div className={`__container ms-motion-slideUpIn`} data-width={`large`}>
-        {coin && coin.length > 0 && (
+        
+      
+        {ERC20tokens && ERC20tokens.length > 0 && (
           <>
-            {coin.map((item, i) => {
+            {ERC20tokens.map((item, i) => {
               return (
-                <div className="card" key={i}>
+                <div className={`card ${styles.token}`} key={i}>
                   <div className="card__body">
-                    <figure>
-                      <img src={item.logo_url} alt={`${item.name} Icon`} />
-                    </figure>
-                    {item.name}({item.symbol}){item.chain_name}
-                    <mark>
-                      {item.actual_price}$ | {item.amount}
-                    </mark>
-                  </div>
-                </div>
-              )
-            })}
-          </>
-        )}
-
-        {tokens && tokens.length > 0 && (
-          <>
-            {tokens.map((item, i) => {
-              return (
-                <div className="card" key={i}>
-                  <div className="card__body">
-                    {item.name}({item.symbol}){item.chain_name}
+                    <ul className="d-flex align-items-center justify-content-start">
+                      <li>
+                        <figure>
+                          <img src={item.logo_url !== null ? item.logo_url : DefaultIcon} alt={`${item.name} Icon`} />
+                        </figure>
+                      </li>
+                      <li>
+                        {item.name}
+                        <br />
+                        {item.amount}({item.symbol})
+                      </li>
+                    </ul>
                   </div>
                 </div>
               )

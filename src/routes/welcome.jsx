@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { Title } from './helper/DocumentTitle'
 import styles from './Welcome.module.scss'
 import DeezStealthSVG from './components/DeezStealthSVG.jsx'
-import { MetaMaskButton, useAccount, useSDK, useSignMessage } from '@metamask/sdk-react-ui'
+import { MetaMaskButton, useAccount, useSDK, useSignMessage, MetaMaskUIProvider } from '@metamask/sdk-react-ui'
 
 export const loader = async () => {
   return defer({
@@ -63,7 +63,9 @@ function Welcome({ title }) {
 
         {!isConnected && <MetaMaskButton theme={'light'} color="white"></MetaMaskButton>}
 
-        <button onClick={() => navigate('/about')} className="mt-20">🥷 About</button>
+        <button onClick={() => navigate('/about')} className="mt-20">
+          🥷 About
+        </button>
 
         <small className={styles.version}>V 1.0.0</small>
       </div>

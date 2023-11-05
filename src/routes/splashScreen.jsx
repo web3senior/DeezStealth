@@ -18,7 +18,7 @@ const SplashScreen = ({ title }) => {
     // Navifate to
     window.setTimeout(() => {
        navigate('/welcome')
-    }, 1500)
+    }, 2000)
   }, [])
 
   return (

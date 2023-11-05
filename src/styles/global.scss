@@ -44,26 +44,31 @@ a {
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.2rem 0 0;
-  
+  padding:  1.5rem 1.2rem;
+  background-color: var(--black-100);
+
   h1 {
-    font-size: 14px !important;
+    font-size: 16px !important;
     text-transform: capitalize;
   }
 
   a {
     display: block;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid blue;
+    background-color: var(--black-025);
+    border-radius: 999px;
+
+    &:hover {
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
   }
 
   svg {
-    border: 1px solid red;
-    width: 10px;
+    width: 25px;
   }
 }
 

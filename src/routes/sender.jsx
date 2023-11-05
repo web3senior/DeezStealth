@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { SocketPendingSubscriber, ethers } from 'ethers'
+import { ethers } from 'ethers'
 import { FileUploader } from 'react-drag-drop-files'
 import { Title } from './helper/DocumentTitle'
 import styles from './Sender.module.scss'
-import { getStealthAddress, getStealthPrivateKey } from '../util/stealth'
+import { getStealthAddress } from '../util/stealth'
 
 const fileTypes = ['CSV']
 
@@ -88,7 +88,6 @@ export default function Sender({ title }) {
     <section className={styles.section}>
       <div className={`__container ms-motion-slideUpIn`} data-width={`large`}>
         <div className={`card ms-depth-4 text-justify`}>
-
           <div className='card__body'>
             <h1>Distribute</h1>
             <FileUploader

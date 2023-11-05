@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { MetaMaskUIProvider } from '@metamask/sdk-react-ui'
-import { AuthProvider } from './contexts/AuthContext'
 import './index.scss'
 import './styles/global.scss'
 
@@ -102,7 +101,7 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  // </React.StrictMode>
 )

@@ -74,7 +74,7 @@ function Welcome({ title }) {
 
 
 
-        <button onClick={() => navigate('/about')} className="mt-20">
+        <button  onClick={() => navigate('/about')} className="mt-20">
           🥷 About
         </button>
 

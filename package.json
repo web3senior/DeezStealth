@@ -3,7 +3,7 @@
   "private": false,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://imaginative-fudge-288f18.netlify.app/",
+  "homepage": "https://imaginative-fudge-288f18.netlify.app/dist/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

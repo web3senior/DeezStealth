@@ -9,7 +9,7 @@
 <br>
 
 <div align="center">
-## About DeezStealth
+<h2>About DeezStealth</h2>
 
 ![ninja](/src/assets/logo.png)
 </div>
@@ -21,7 +21,7 @@ DeezStealth is a dapp that allows users to create batch send transactions levera
 ## Features
 
 - login with [@metamask/sdk](https://metamask.io/sdk/) featuring the ability for users to login with both metamask mobile wallet and metamask browser extension
-- upload .csv file to create stealth addresses for batch sending 
+- upload .csv file to create bulk stealth addresses for using in batch sending
 - [deezstealth.sol](https://goerli.lineascan.build/address/0xF9223Ba23C6381b30405Ec6D72717E3294AC848e#code) contract deployed and verified on Linea Goerli Testnet Blockchain
 
 ## Run Front-end
@@ -55,7 +55,6 @@ The DeezStealth.sol contract is deployed and verified on to Linea Goerli [here](
 - [react-drag-and-drop](https://www.npmjs.com/package/react-drag-drop-files)
 - [SASS](https://github.com/sass/sass)
 - [@typeform/embed-react](https://github.com/Typeform/embed/tree/main/packages/embed-react)
-- [vite-deploy](https://github.com/ErickKS/vite-deploy)
 
 ### Built By
 

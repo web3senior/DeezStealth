@@ -1,10 +1,7 @@
 import { Outlet, useNavigate, useNavigation, useParams, useLocation } from 'react-router-dom'
-import { Toaster } from 'react-hot-toast'
-import {
-  MetaMaskButton, useAccount,
-  useSDK,
-  useSignMessage
-} from '@metamask/sdk-react-ui';
+import toast, { Toaster } from 'react-hot-toast'
+import { MetaMaskButton, useAccount, useSDK, useSignMessage } from '@metamask/sdk-react-ui'
+import Logo from './../assets/logo.png'
 import styles from './UserRoot.module.scss'
 
 export default function UserRoot(props) {
@@ -20,40 +17,43 @@ export default function UserRoot(props) {
     isSuccess: isSignSuccess,
     signMessage,
   } = useSignMessage({
-    message: 'gm wagmi frens',
-  });
+    message: 'By using our Dapp application, you agree to these terms of use. If you do not agree to these terms, please do not use our application.',
+  })
 
-  const { isConnected } = useAccount();
+  const { isConnected } = useAccount()
 
   return (
     <>
       <Toaster />
-      <header className={styles.header} >
-      <MetaMaskButton theme={'light'} color="white"></MetaMaskButton>
+      <header className={`${styles.header} d-flex justify-content-between`}>
+        <figure>
+          <img alt="logo" src={Logo} />
+          <figcaption>{import.meta.env.VITE_TITLE}</figcaption>
+        </figure>
+
+        <MetaMaskButton theme={'light'} color="white"></MetaMaskButton>
+
         {isConnected && (
           <>
-            <div style={{ marginTop: 20 }}>
+            {/* <div style={{ marginTop: 20 }}>
               <button disabled={isSignLoading} onClick={() => signMessage()}>
                 Sign message
               </button>
               {isSignSuccess && <div>Signature: {signData}</div>}
-              {isSignError && <div>Error signing message</div>}
-            </div>
+              {isSignError && toast.error(`Error signing message`)}
+            </div> */}
           </>
         )}
-        </header>
+      </header>
 
       <main className={styles.main}>
         <Outlet />
       </main>
 
-      <footer className={styles.footer}>
-        {pathname.search('/user/request') <= -1 && (
-          <>
-            <button onClick={() => navigate(`/user/request`)}>9</button>
-            <button onClick={() => navigate(`/user/account`)}>9  9</button>
-          </>
-        )}
+      <footer className={`${styles.footer} d-flex justify-content-between align-items-center`}>
+      <button onClick={() => navigate(`/user/`)}>Dashboard</button>
+      <button onClick={() => navigate(`/user/sender`)}>Sender</button>
+        <button onClick={() => navigate(`/user/receiver`)}>Receiver</button>
       </footer>
     </>
   )

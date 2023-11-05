@@ -16,6 +16,10 @@ function Welcome({ title }) {
       <div>
         <h4>Welcome</h4>
         <p>First, connect your wallet then see the all features.</p>
+        {
+          
+          typeof window.ethereum !== 'undefined' && <div className='alert alert--success'>MetaMask is installed. Let's run the app</div>
+        }
         <button onClick={() => navigate('/user')}>Run app</button>
         <button onClick={() => navigate('/about')} className='mt-20'>About Team</button>
         <button onClick={() => navigate('/faq')} className='mt-20'>FAQ</button>

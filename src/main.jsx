@@ -12,9 +12,8 @@ const UserRoot = lazy(() => import('./routes/userRoot'))
 import SplashScreen from './routes/splashScreen.jsx'
 import Welcome from './routes/welcome.jsx'
 import Home, { loader as homeLoader } from './routes/home.jsx'
-import Login from './routes/login.jsx'
 import About from './routes/about.jsx'
-import Dashboard from './routes/dashboard.jsx'
+import Dashboard , {loader as dashboardLoader}from './routes/dashboard.jsx'
 import FAQ from './routes/faq.jsx'
 import Loading from './routes/components/LoadingSpinner'
 
@@ -48,29 +47,24 @@ const router = createBrowserRouter([
         path: 'faq',
         element: <FAQ title={`faq`} />,
       },
-      {
-        path: 'login',
-        element: <Login title={`login`} />,
-      },
     ],
   },
   {
     path: 'user',
     element: (
-
       <Suspense fallback={<Loading />}>
-      <MetaMaskUIProvider sdkOptions={{
-        dappMetadata: {
-          name: 'React Demo Button',
-          url: 'http://reactdemobutton.localhost'
-        },
-        checkInstallationImmediately: false
-      }}
-      >
-        <UserRoot />
-            </MetaMaskUIProvider>
+        <MetaMaskUIProvider
+          sdkOptions={{
+            dappMetadata: {
+              name: 'DeezStealth Dapp',
+              url: document.url,
+            },
+            checkInstallationImmediately: false,
+          }}
+        >
+          <UserRoot />
+        </MetaMaskUIProvider>
       </Suspense>
-
     ),
     errorElement: <ErrorPage />,
     children: [
@@ -79,23 +73,23 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            loader: dashboardLoader,
             element: <Dashboard to={`dashboard`} />,
           },
           {
             path: 'sender',
-            loader: ()=>[],
-            element: <></>,
+            loader: () => [],
+            element: <>Sender page here</>,
           },
           {
             path: 'receiver',
-            loader: ()=>[],
-            element: <></>,
+            loader: () => [],
+            element: <>Receiver page here</>,
           },
         ],
       },
     ],
   },
-
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

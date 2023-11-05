@@ -1,6 +1,14 @@
 @import './../styles/components/responsive';
 
 .header {
+ background-color: var(--grey-20);
+  padding: 1rem .5rem;
+
+  figure {
+    img {
+      width: 60px;
+    }
+  }
 }
 
 .main {
@@ -21,6 +29,7 @@ footer {
   right: 0;
   
   button {
+    width: 100%;
     background-color: var(--secondary-color);
   }
 }

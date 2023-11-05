@@ -25,7 +25,7 @@ DeezStealth is a dapp that allows users to create batch send transactions levera
 
 - login with [@metamask/sdk](https://metamask.io/sdk/) featuring the ability for users to login with both metamask mobile wallet and metamask browser extension
 - upload .csv file to create stealth addresses for batch sending 
-- [deezstealth.sol]() contract deployed and verified on Linea Goerli Testnet Blockchain
+- [deezstealth.sol](https://goerli.lineascan.build/address/0xF9223Ba23C6381b30405Ec6D72717E3294AC848e#code) contract deployed and verified on Linea Goerli Testnet Blockchain
 
 ## Run 
 

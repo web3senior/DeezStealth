@@ -1,28 +1,19 @@
-# TODOs
+<div align="center">
+    <h1>🥷DeezStealth</h1>
+</div>
 
-- fix darkmode colours
-- animate it to fade away
-- don't show metamask connect button on /user routes if connected
-- only allow access to /user routes if wallet is connected
-- add @decommas/sdk and use it to fetch portfolio data of wallet on connection
-- extract /dashboard component into it's own card and display at top of /sender and /receiver pages
+<div align="center">
+    <a href="">youtube video</a>
+</div>
 
-/sender
-- add drop down list of available tokens (from decommas api + decommas/sdk) to /sender component to select which token to send
-- add a toggle button to enable GasPass on /sender 
-- add an input field to select total amount of tokens to be sent (divided evenly across all recipient addresses from .csv upload)
-- create the .csv file format template and add validation functions to the file upload component in /sender
-- display the uploaded addresses and associated PubKeys, Stealth Addresses, amounts to send, recipients and GasPass? in a list with text inputs next to them to change the amounts to send
+<br>
 
 
-# DeezStealth
+## About DeezStealth
 
 ![ninja](/src/assets/logo.png)
 
-
 This repo contains the code for a project submission for BuildHACKS Hackathon on [buidlbox.io](https://app.buidlbox.io/buidlbox/buidlhacks) which ended Nov. 5th 2023
-
-## About
 
 DeezStealth is a dapp that allows users to create batch send transactions leveraging [EIP5664 Stealth Addresses](https://eips.ethereum.org/EIPS/eip-5564) on Linea Blockchain.
 

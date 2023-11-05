@@ -1,7 +1,7 @@
 @import './../styles/components/responsive';
 
 .section {
-  color: #1e3135;
+  color: #2bb18b;
   height: 100dvh;
   height: 100vh;
   position: relative;
@@ -10,9 +10,60 @@
   justify-content: center;
   align-items: center;
   place-items: center;
-  row-gap: 2rem;
-  padding: 2rem 0;
+  row-gap: 1rem;
+  padding: 1rem 0;
   text-align: center;
+
+  figure {
+    position: relative;
+    overflow: hidden;
+
+    &:after {
+      --extra-size: 100px;
+      content: '';
+      top: 0;
+      transform: translate(100%, 100%) rotate(45deg);
+      width: calc(100%  + var(--extra-size));
+      height:  calc(100%  + var(--extra-size));
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      animation: slide 2.5s infinite 0.5s;
+      background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+      background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        color-stop(0%, rgba(255, 255, 255, 0)),
+        color-stop(50%, rgba(255, 255, 255, 0.8)),
+        color-stop(99%, rgba(128, 186, 232, 0)),
+        color-stop(100%, rgba(125, 185, 232, 0))
+      );
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+      /* IE10+ */
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+      /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#007db9e8', GradientType=1);
+      /* IE6-9 */
+    }
+
+    /* animation */
+
+    @keyframes slide {
+      0% {
+        transform: translate(-100%, -100%) rotate(45deg);
+      }
+
+      100% {
+        transform: translate(100%, 100%) rotate(45deg);
+      }
+    }
+  }
 
   b {
     font-size: 2rem;
@@ -24,7 +75,8 @@
 
   p {
     min-height: 100px;
-    max-width: 300px;
+    line-height: 1.2;
+    text-wrap: balance;
   }
 
   p,
@@ -51,9 +103,9 @@
     cursor: pointer;
     margin-top: 1rem;
     -webkit-tap-highlight-color: transparent;
-    --tw-shadow: 0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
-    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color),0 8px 10px -6px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+    --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 
     &:active {
       outline-color: var(--secondary-color);
@@ -107,5 +159,5 @@
   display: block;
   margin-top: 1rem;
   font-family: var(--ff-mono);
-  opacity: .6;
+  opacity: 0.6;
 }

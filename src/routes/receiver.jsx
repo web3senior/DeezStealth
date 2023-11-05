@@ -8,29 +8,30 @@ import abi from '../abi/DeezStealth'
 export default function Receiver({ title }) {
   Title(title)
 
+  const [contract, setContract] = useState(null)
+  const [isReady, setIsReady] = useState(false)
+
   const [publicKeyInput, setPublicKeyInput] = useState('')
   const [publicKey, setPublicKey] = useState('')
   const [privateKey, setPrivateKey] = useState('')
   const [sharedSecret, setSharedSecret] = useState('')
 
-  let contract = null
-
   useEffect(() => {
-    if (contract === null) {
-      // TODO tmp
-      const provider = new ethers.BrowserProvider(window.ethereum)
-      provider.getSigner().then(signer => {
-        const contractAddress = '0xF9223Ba23C6381b30405Ec6D72717E3294AC848e' // TODO extract from here
-        contract = new ethers.Contract(contractAddress, abi, provider)
+    const provider = new ethers.BrowserProvider(window.ethereum)
+    provider.getSigner().then(signer => {
+      const contractAddress = '0xF9223Ba23C6381b30405Ec6D72717E3294AC848e' // TODO extract from here
+      const contract = new ethers.Contract(contractAddress, abi, signer)
 
-        // TODO
-        contract.pubKey(signer.address).then(pubKey => {
-          if (pubKey.length > 2) {
-            setPublicKey(pubKey)
-          }
-        })
+      setContract(contract)
+
+      // TODO
+      contract.pubKey(signer.address).then(pubKey => {
+        if (pubKey.length > 2) {
+          setPublicKey(pubKey)
+        }
+        setIsReady(true)
       })
-    }
+    })
   }, [])
 
   const handleGenerate = async () => {
@@ -42,11 +43,17 @@ export default function Receiver({ title }) {
   }
 
   const handleSubmitPubKey = async () => {
-    alert("TODO")
+    const tx = await contract.setPubKey(publicKeyInput)
+    await tx.wait()
+    // TODO check if no errors
+    setPublicKey(publicKeyInput)
   }
 
   const handleRemovePubKey = async () => {
-    alert("TODO")
+    const tx = await contract.removePubKey()
+    await tx.wait()
+    // TODO check if no errors
+    setPublicKey('')
   }
 
   return (
@@ -60,19 +67,28 @@ export default function Receiver({ title }) {
             <p><button onClick={handleGenerate}>Generate</button></p>
             <p>&nbsp;</p>
 
-            {publicKey === '' ? (
+            {!isReady ? (
               <Fragment>
-                <h3>Set Public Key</h3>
-                <p><b>TODO Support private key too to derive public key from it</b></p>
-                <p><input type="text" placeholder="Public Key" value={publicKeyInput} onChange={e => setPublicKeyInput(e.target.value)} /></p>
-                <p><button onClick={handleSubmitPubKey}>Submit</button></p>
-                <p>&nbsp;</p>
+                <h3>Public Key</h3>
+                Loading...
               </Fragment>
             ) : (
               <Fragment>
-                <h3>Public Key</h3>
-                <p>{publicKey} [copy]</p>
-                <p><button onClick={handleRemovePubKey}>Remove</button></p>
+                {publicKey === '' ? (
+                  <Fragment>
+                    <h3>Public Key</h3>
+                    <p><b>TODO Support private key too to derive public key from it</b></p>
+                    <p><input type="text" placeholder="Public Key" value={publicKeyInput} onChange={e => setPublicKeyInput(e.target.value)} /></p>
+                    <p><button onClick={handleSubmitPubKey}>Submit</button></p>
+                    <p>&nbsp;</p>
+                  </Fragment>
+                ) : (
+                  <Fragment>
+                    <h3>Public Key</h3>
+                    <p>{publicKey} [copy]</p>
+                    <p><button onClick={handleRemovePubKey}>Remove</button></p>
+                  </Fragment>
+                )}
               </Fragment>
             )}
           </div>

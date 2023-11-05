@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import { FileUploader } from 'react-drag-drop-files'
 import { Title } from './helper/DocumentTitle'
@@ -14,9 +14,23 @@ const secret = 'abcdef12435' // TODO generate new unique one for each address?
 
 export default function Sender({ title }) {
   Title(title)
+
+  const [contract, setContract] = useState(null)
+  const [isReady, setIsReady] = useState(false)
+
   const [file, setFile] = useState(null)
   const [receivers, setReceivers] = useState([])
   const [isReadyToDistribute, setIsReadyToDistribute] = useState(false)
+
+  useEffect(() => {
+    const provider = new ethers.BrowserProvider(window.ethereum)
+    provider.getSigner().then(signer => {
+      const contractAddress = '0xF9223Ba23C6381b30405Ec6D72717E3294AC848e' // TODO extract from here
+      const contract = new ethers.Contract(contractAddress, abi, signer)
+      setContract(contract)
+      setIsReady(true)
+    })
+  }, [])
 
   const handleChange = async (file) => {
     // TODO check errors
@@ -27,12 +41,6 @@ export default function Sender({ title }) {
       const [address] = rows[i].split(',')
       addresses.push(address)
     }
-
-    // TODO tmp
-    const provider = new ethers.BrowserProvider(window.ethereum)
-    // const signer = ethersProvider.getSigner() TODO remove?
-    const contractAddress = '0xF9223Ba23C6381b30405Ec6D72717E3294AC848e' // TODO extract from here
-    const contract = new ethers.Contract(contractAddress, abi, provider)
 
     const pubKeys = await contract.getPubKeys(addresses)
     pubKeys.forEach((pubKey, i) => {

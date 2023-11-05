@@ -22,6 +22,6 @@ const Heading = (props) => (
 export default Heading
 
 Heading.defaultProps = {
-  title: 'عنوان',
+  title: 'DeezStealth',
   lead: '',
 }

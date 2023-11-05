@@ -15,6 +15,7 @@ import Home, { loader as homeLoader } from './routes/home.jsx'
 import About from './routes/about.jsx'
 import Dashboard , {loader as dashboardLoader}from './routes/dashboard.jsx'
 import FAQ from './routes/faq.jsx'
+import Sender from './routes/sender.jsx'
 import Loading from './routes/components/LoadingSpinner'
 
 const router = createBrowserRouter([
@@ -79,7 +80,7 @@ const router = createBrowserRouter([
           {
             path: 'sender',
             loader: () => [],
-            element: <>Sender page here</>,
+            element: <Sender to={`sender`} />,
           },
           {
             path: 'receiver',

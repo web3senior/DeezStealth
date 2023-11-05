@@ -1,7 +1,7 @@
 @import './../styles/components/responsive';
 
 .section {
-  color: hsl(163, 61%, 43%);
+  color: #2bb18b;
   height: 100dvh;
   height: 100vh;
   position: relative;
@@ -10,8 +10,8 @@
   justify-content: center;
   align-items: center;
   place-items: center;
-  row-gap: 2rem;
-  padding: 2rem 0;
+  row-gap: 1rem;
+  padding: 1rem 0;
   text-align: center;
 
   figure {
@@ -75,7 +75,8 @@
 
   p {
     min-height: 100px;
-    max-width: 300px;
+    line-height: 1.2;
+    text-wrap: balance;
   }
 
   p,

@@ -10,13 +10,14 @@ import ErrorPage from './error-page'
 const Root = lazy(() => import('./routes/root'))
 const UserRoot = lazy(() => import('./routes/userRoot'))
 import SplashScreen from './routes/splashScreen.jsx'
-import Welcome from './routes/welcome.jsx'
+import Welcome, {loader as welcomeLoader} from './routes/welcome.jsx'
 import Home, { loader as homeLoader } from './routes/home.jsx'
 import About from './routes/about.jsx'
 import Dashboard, { loader as dashboardLoader } from './routes/dashboard.jsx'
-import FAQ from './routes/faq.jsx'
 import Sender from './routes/sender.jsx'
 import Loading from './routes/components/LoadingSpinner'
+
+console.log(`%c ⟠`,'color:#2bb18b;font-size:8rem')
 
 const router = createBrowserRouter([
   {
@@ -53,11 +54,7 @@ const router = createBrowserRouter([
       {
         path: 'setting',
         element: <></>,
-      },
-      {
-        path: 'faq',
-        element: <FAQ title={`faq`} />,
-      },
+      }
     ],
   },
   {

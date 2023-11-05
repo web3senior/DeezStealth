@@ -15,8 +15,16 @@
 
   --color-light-animation-1: rgba(0, 0, 0, 0);
   --color-light-animation-2: rgba(71, 65, 65, 0.2);
-  --color-light-animation-3: rgba(0, 0, 0, .5);
+  --color-light-animation-3: rgba(0, 0, 0, 0.5);
   --color-light-animation-4: rgba(0, 0, 0, 0);
+  --color-bg-button: #fff;
+  --color-text-button: #fff;
+  --color-version: #fff;
+  --color-header-bg: #161616;
+  --color-header-text: #fff;
+  --color-tab-active: #102e10;
+  --color-card-bg: #323232;
+  --color-card-text: #fff;
 }
 
 html,
@@ -40,7 +48,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -73,10 +81,19 @@ button:focus-visible {
     --color-light-animation-2: rgba(255, 255, 255, 0.8);
     --color-light-animation-3: rgba(128, 186, 232, 0);
     --color-light-animation-4: rgba(125, 185, 232, 0);
-    
-  --primary-color: hsl(163, 61%, 43%);
-  --secondary-color: #4CE5B1;
-  --tertiary-color: #E9E600;
+
+    --primary-color: hsl(163, 61%, 43%);
+    --secondary-color: #4ce5b1;
+    --tertiary-color: #e9e600;
+
+    --color-bg-button: #fff;
+    --color-text-button: #000;
+    --color-version: #000;
+    --color-header-bg: #000;
+    --color-header-text: #000;
+    --color-tab-active: #000;
+    --color-card-bg: #fff;
+    --color-card-text: #212121;
   }
 
   a:hover {

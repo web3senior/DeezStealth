@@ -30,7 +30,6 @@
       z-index: 1;
       animation: slide 2.5s infinite 0.5s;
 
-
       background: linear-gradient(
         to right,
         var(--color-light-animation-1) 0%,
@@ -75,15 +74,12 @@
   }
 
   button {
-    --tile-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14), inset 0 0 0px 2px transparent;
-    --tile-shadow-hover: 0 0 2px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.14);
     --accent-border-width: 3px;
     text-align: center;
     padding: 0.8rem 0.2rem;
-    background-color: var(--white);
-    color: var(--black);
+    background-color: #1d1a1a;
+    color: var(--color-text-button);
     width: 100%;
-
     transition: all ease-in-out 0.25s;
     border-radius: 9px;
     height: 49px;
@@ -91,8 +87,8 @@
     cursor: pointer;
     margin-top: 1rem;
     -webkit-tap-highlight-color: transparent;
-    --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+    --tile-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14), inset 0 0 0px 2px transparent;
+    --tile-shadow-hover: 0 0 2px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.14);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 
     &:active {
@@ -146,19 +142,19 @@
 .version {
   display: block;
   margin-top: 1rem;
-  color: var(--black);
+  color: var(--color-version);
   font-family: var(--ff-mono);
   opacity: 0.6;
 }
 
 .poweredby {
   position: fixed;
-  bottom : 1rem;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
   color: var(--primary-color);
-  font-size: .8rem;
-  opacity: .6;
+  font-size: 0.8rem;
+  opacity: 0.6;
 }
 
 .version,

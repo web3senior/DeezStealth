@@ -1,12 +1,15 @@
 @import './../styles/components/responsive';
 
 .header {
- background-color: var(--grey-20);
+ background-color: var(--color-header-bg);
+ color: var(--color-header-text);
   padding: 1rem .5rem;
 
   figure {
+    text-align: center;
     img {
       width: 60px;
+      margin: 0 auto;
     }
   }
 }

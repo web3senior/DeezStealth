@@ -146,6 +146,22 @@
 .version {
   display: block;
   margin-top: 1rem;
+  color: var(--black);
   font-family: var(--ff-mono);
   opacity: 0.6;
+}
+
+.poweredby {
+  position: fixed;
+  bottom : 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--primary-color);
+  font-size: .8rem;
+  opacity: .6;
+}
+
+.version,
+.poweredby {
+  user-select: none;
 }

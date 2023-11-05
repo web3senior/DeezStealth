@@ -80,6 +80,8 @@ function Welcome({ title }) {
         </button>
 
         <small className={styles.version}>V 1.0.0</small>
+
+        <small className={styles.poweredby}>Built with DeCommas, Linea, MetaMask SDK</small>
       </div>
     </section>
   )

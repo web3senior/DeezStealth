@@ -13,7 +13,7 @@ import SplashScreen from './routes/splashScreen.jsx'
 import Welcome from './routes/welcome.jsx'
 import Home, { loader as homeLoader } from './routes/home.jsx'
 import About from './routes/about.jsx'
-import Dashboard , {loader as dashboardLoader}from './routes/dashboard.jsx'
+import Dashboard, { loader as dashboardLoader } from './routes/dashboard.jsx'
 import FAQ from './routes/faq.jsx'
 import Sender from './routes/sender.jsx'
 import Loading from './routes/components/LoadingSpinner'
@@ -23,7 +23,17 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <Suspense fallback={<Loading />}>
-        <Root />
+        <MetaMaskUIProvider
+          sdkOptions={{
+            dappMetadata: {
+              name: 'DeezStealth Dapp',
+              url: document.url,
+            },
+            checkInstallationImmediately: false,
+          }}
+        >
+          <Root />
+        </MetaMaskUIProvider>
       </Suspense>
     ),
     errorElement: <ErrorPage />,

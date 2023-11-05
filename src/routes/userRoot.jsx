@@ -17,7 +17,7 @@ export default function UserRoot(props) {
     isSuccess: isSignSuccess,
     signMessage,
   } = useSignMessage({
-    message: 'By using our Dapp application, you agree to these terms of use. If you do not agree to these terms, please do not use our application.',
+    message: '',
   })
 
   const { isConnected } = useAccount()

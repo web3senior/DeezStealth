@@ -9,8 +9,9 @@
 - add a toggle button to enable GasPass on /sender 
 - add an input field to select total amount of tokens to be sent (divided evenly across all recipient addresses from .csv upload)
 - create the .csv file format template and add validation functions to the file upload component in /sender
-- display the uploaded addresses and associated PubKeys, Stealth Addresses, amounts to send, recipients and GasPass? in a list with text inputs next to them to change the amounts to send
-
+- display the uploaded addresses and associated PubKeys, Stealth Addresses, amounts to send, recipients and GasPass? in a list 
+with text inputs next to them to change the amounts to send
+- Clean up the routes
 
 # DeezStealth
 

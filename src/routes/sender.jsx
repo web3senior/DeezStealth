@@ -185,9 +185,9 @@ export default function Sender({ title }) {
               name='file'
               types={fileTypes}
             />
-            <p>{file ? `File name: ${file.name}` : (
-              <a href="javascript:void()" onClick={handleExample} style={{ textDecoration: 'underline' }}>Download Example CSV</a>
-            )}</p>
+            <p>{file ? `File name: ${file.name}` : 'no files uploaded yet'}</p>
+              <p><a href="javascript:void()" onClick={handleExample} style={{ textDecoration: 'underline' }}>Download Example CSV</a>
+            </p>
 
             {file && (
               <Fragment>

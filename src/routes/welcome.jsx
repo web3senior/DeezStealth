@@ -40,7 +40,7 @@ function Welcome({ title }) {
         {transaction && <>{JSON.stringify(transaction)}</>}
 
         <h4>{import.meta.env.VITE_TITLE}</h4>
-        <p>Create Stealth Addresses and batch send tokens</p>
+        <p>Create Stealth Addresses & Batch Send Tokens</p>
 
 
 

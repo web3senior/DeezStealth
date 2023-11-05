@@ -1,3 +1,18 @@
+# TODOs
+
+- fix ninja svg quality
+- fix darkmode colours
+- only show metamask connect button on /user routes
+- only allow access to /user routes if wallet is connected
+- add @decommas/sdk and use it to fetch portfolio data of wallet on connection
+- extract /dashboard component into it's own card and display at top of /sender and /receiver pages
+- add drop down list of available tokens (from decommas api + decommas/sdk) to /sender component to select which token to send
+- add a toggle button to enable GasPass on /sender 
+- add an input field to select total amount of tokens to be sent (divided evenly across all recipient addresses from .csv upload)
+- create the .csv file format template and add validation functions to the file upload component in /sender
+- display the uploaded addresses and associated PubKeys, Stealth Addresses, amounts to send, recipients and GasPass? in a list with text inputs next to them to change the amounts to send
+
+
 # DeezStealth
 
 This repo contains the code for a project submission for BuildHACKS Hackathon on [buidlbox.io](https://app.buidlbox.io/buidlbox/buidlhacks) which ended Nov. 5th 2023

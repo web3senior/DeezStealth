@@ -53,12 +53,11 @@ export default function Sender({ title }) {
     console.log('Addresses', addresses)
 
     const pubKeys = await contract.getPubKeys(addresses)
-    const secret = generateRandomSecret(32)
     pubKeys.forEach((pubKey, i) => {
       if (pubKey === '0x') {
         return // skip
       }
-      const [stealthAddress, sharedSecret] = getStealthAddress(pubKey, secret)
+      const [stealthAddress, sharedSecret] = getStealthAddress(pubKey, generateRandomSecret(32))
       receivers.push({
         address: addresses[i],
         pubKey,
@@ -175,7 +174,7 @@ export default function Sender({ title }) {
                   <p><b>No public keys found to distribute.</b></p>
                 ) : (
                   <Fragment>
-                    <p><b>{receivers.length} public keys found to distribute</b></p>
+                    <p><b>{receivers.length} stealth accounts generated</b></p>
                     <p><button onClick={handleExport}>🥷 Export stealth CSV</button></p>
                   </Fragment>
                 )}

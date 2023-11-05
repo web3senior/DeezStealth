@@ -49,24 +49,24 @@ export default function Receiver({ title }) {
   }
 
   const handleSubmitPubKey = async () => {
-    let _pubKey = publicKeyInput
+    let _key = publicKeyInput
     // if (publicKeyInput.substring(0, 2) !== '0x') {
     //   _pubKey = '0x' + publicKeyInput
     // }
     // TODO try to add 0x prefix?
-    if (ethers.isHexString(_pubKey, 32)) { // is valid private key?
-      const wallet = new ethers.Wallet(_pubKey)
-      _pubKey = wallet.signingKey.publicKey
-      console.log('PUBLIC KEY', _pubKey)
+    if (ethers.isHexString(_key, 32)) { // is valid private key?
+      const wallet = new ethers.Wallet(_key)
+      _key = wallet.signingKey.publicKey
+      console.log('PUBLIC KEY', _key)
     } else {
-      if (!ethers.isHexString(_pubKey, 64)) { // is valid public key?
+      if (!ethers.isHexString(_key, 64)) { // is valid public key?
         alert('Value you have provided is not a valid public or private key')
         return
       }
     }
     setIsSubmitting(true)
     try {
-      const tx = await contract.setPubKey(_pubKey)
+      const tx = await contract.setPubKey(_key)
       await tx.wait()
     } catch (e) {
       // TODO
@@ -74,7 +74,7 @@ export default function Receiver({ title }) {
       return
     }
     // TODO check if no errors
-    setPublicKey(_pubKey)
+    setPublicKey(_key)
     setIsSubmitting(false)
   }
 
@@ -90,7 +90,7 @@ export default function Receiver({ title }) {
     }
     // TODO check if no errors
     setPublicKey('')
-    setIsRemoving(true)
+    setIsRemoving(false)
   }
 
   return (
@@ -108,7 +108,7 @@ export default function Receiver({ title }) {
                 {publicKey === '' ? (
                   <Fragment>
                     <h3>Save Public Key</h3>
-                    <p><input type="text" placeholder="Public Key or Private Key starting with 0x" value={publicKeyInput} onChange={e => setPublicKeyInput(e.target.value)} /></p>
+                    <p><input type="text" placeholder="Uncompressed Public Key or Private Key starting with 0x" value={publicKeyInput} onChange={e => setPublicKeyInput(e.target.value)} /></p>
                     <p><button onClick={handleSubmitPubKey} disabled={isSubmitting}>{isSubmitting ? 'Submitting...' : 'Submit'}</button></p>
                     <p>&nbsp;</p>
                   </Fragment>

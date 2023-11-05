@@ -72,7 +72,7 @@ export function getStealthPrivateKey(privateKey, sharedSecret) {
     return "0x" + stealthPrivateKeyHex
 }
 
-export function generateRandomSecret(length) {
+export function generateRandomSecret(length) { // TODO crypto
     const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let salt = "";
     for (let i = 0; i < length; i++) {

@@ -38,6 +38,35 @@ a {
   }
 }
 
+// Page Title
+.heading {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.2rem 0 0;
+  
+  h1 {
+    font-size: 14px !important;
+    text-transform: capitalize;
+  }
+
+  a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid blue;
+  }
+
+  svg {
+    border: 1px solid red;
+    width: 10px;
+  }
+}
+
 input {
   height: 49px;
   width: 100%;
@@ -56,7 +85,7 @@ textarea {
   width: 100%;
   border: 1px solid #eee;
   min-height: 100px;
-  padding: .4rem 0.5rem;
+  padding: 0.4rem 0.5rem;
 }
 
 a.active {

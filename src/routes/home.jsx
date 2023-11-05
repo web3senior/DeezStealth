@@ -18,7 +18,6 @@ function App({ title }) {
   const [isLoading, setIsLoading] = useState()
   const [data, setData] = useState(useLoaderData().food)
 
-
   return (
     <section className={`${styles.section} animate pop`}>
      

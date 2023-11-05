@@ -59,7 +59,7 @@ const MM = () => {
   const { isConnected } = useAccount()
   return (
     <>
-      <MetaMaskButton theme={(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)? 'dark':'light'} 
+      <MetaMaskButton theme={(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)? 'dark':'dark'} 
       color="black"></MetaMaskButton>
 
       {isConnected && (

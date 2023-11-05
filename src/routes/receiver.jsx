@@ -99,12 +99,12 @@ export default function Receiver({ title }) {
 
   return (
     <section className={styles.section}>
-      <div className={`__container ms-motion-slideUpIn`} data-width={`large`}>
-        <div className={`card ms-depth-4 text-justify`}>
+      <div className={`__container ms-motion-slideUpIn w-100`} data-width={`xlarge`}>
+        <div className={`card ms-depth-4 text-justify w-100`}>
           <div className='card__body'>
             {!isReady ? (
               <Fragment>
-                <h3>Public Key</h3>
+                <b>Public Key</b><br/>
                 Loading...
               </Fragment>
             ) : (
@@ -129,10 +129,10 @@ export default function Receiver({ title }) {
             )}
 
             <p>&nbsp;</p>
-            <h3>Generate Stealth Private Key</h3>
+            <b>Generate Stealth Private Key</b>
             <p style={{ marginTop: '10px' }}><input type="text" placeholder="Shared Secret starting with 0x" value={sharedSecret} onChange={e => setSharedSecret(e.target.value)} /></p>
             <p style={{ marginTop: '10px' }}><input type="text" placeholder="Private Key starting with 0x" value={privateKey} onChange={e => setPrivateKey(e.target.value)} /></p>
-            <p style={{ marginTop: '10px' }}><button onClick={handleGenerate}>Generate</button></p>
+            <p style={{ marginTop: '10px' }}><button onClick={handleGenerate} className='btn'>Generate</button></p>
             <br />
             {stealthPrivateKey && (
               <div>

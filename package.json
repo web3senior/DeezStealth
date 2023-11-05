@@ -1,8 +1,9 @@
 {
   "name": "deezstealth",
-  "private": true,
+  "private": false,
   "version": "1.0.0",
   "type": "module",
+  "homepage": "https://web3senior.github.io/DeezStealth/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

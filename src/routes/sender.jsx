@@ -30,6 +30,8 @@ export default function Sender({ title }) {
   const [totalValue, setTotalValue] = useState(0) // TODO display
   const [totalERC20Amount, setTotalERC20Amount] = useState(0) // TODO display
 
+  const [txHash, setTxHash] = useState('')
+
   useEffect(() => {
     const provider = new ethers.BrowserProvider(window.ethereum)
     provider.getSigner().then(_signer => {
@@ -44,7 +46,7 @@ export default function Sender({ title }) {
     // TODO check errors
     const addresses = [] // TODO support public keys as an input
     const receivers = []
-    const rows = (await file.text()).split('\r\n') // TODO \r\n
+    const rows = (await file.text()).split('\n') // TODO \r\n
     for (let i = 1; i < rows.length; i++) { // TODO 'i = 1' to ignore first titles row
       const [address] = rows[i].split(',')
       addresses.push(address)
@@ -117,7 +119,7 @@ export default function Sender({ title }) {
       console.log('TX', tx)
       const receipt = await tx.wait()
       console.log('RECEIPT', receipt)
-      alert('TX HASH ' + tx.hash)
+      setTxHash(tx.hash)
       setIsReadyToDistribute(true)
       setIsDistributing(false)
     } catch (e) {
@@ -137,11 +139,12 @@ export default function Sender({ title }) {
     setAmount('')
     setGasPassAmount('')
     setIsETH(true)
+    setTxHash('')
   }
 
   const handleExport = () => {
     let csvContent = "Address,Public Key,Stealth Address,Shared Secret"
-    
+
     receivers.forEach(r => {
       csvContent += "\n" + r.address + ',' + r.pubKey + ',' + r.stealthAddress + ',' + r.sharedSecret
     })
@@ -151,6 +154,22 @@ export default function Sender({ title }) {
     const a = document.createElement('a')
     a.href = url
     a.download = 'stealth.csv'
+    a.click()
+  }
+
+  const handleExample = () => {
+    let csvContent = "Address"
+    csvContent += "\n" + "0x8b3962257068bd5d87e1595bd91b13ec10b0c5ec"
+    csvContent += "\n" + "0x240588CeBBd7C2f7e146A9fC1F357C82A9C052DC"
+    csvContent += "\n" + "0x25405c2903e96c52ddf36b53bba9d643aa54f02f"
+    csvContent += "\n" + "0xab156bc72e2fe7e907e129e48a09fc766fe08b2f"
+    csvContent += "\n" + "0x68408f20f04a7e229cf3535bb240a351b6dc8085"
+
+    const blob = new Blob([csvContent], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'stealth_example.csv'
     a.click()
   }
 
@@ -166,7 +185,9 @@ export default function Sender({ title }) {
               name='file'
               types={fileTypes}
             />
-            <p>{file ? `File name: ${file.name}` : 'no files uploaded yet'}</p>
+            <p>{file ? `File name: ${file.name}` : (
+              <a href="javascript:void()" onClick={handleExample} style={{ textDecoration: 'underline' }}>Download Example CSV</a>
+            )}</p>
 
             {file && (
               <Fragment>
@@ -179,14 +200,19 @@ export default function Sender({ title }) {
                   </Fragment>
                 )}
 
-                <p><br /><input type="checkbox" defaultChecked={isETH} onClick={() => setIsETH(!isETH)} /> Distribute Ethereum<br /><br /></p>
-
                 {receivers.length > 0 && (
                   <Fragment>
+                    <p style={{ marginTop: '15px', marginBottom: '15px' }}>
+                      <input type="checkbox" defaultChecked={isETH} onClick={() => setIsETH(!isETH)}
+                        style={{ float: 'left', width: '30px', marginTop: '-6px', marginRight: '6px' }} />
+                      Distribute Ethereum
+                    </p>
                     <p><input value={amount} onChange={e => setAmount(e.target.value)} type="text" placeholder="Amount" /></p>
                     {!isETH && (
                       <Fragment>
-                        <p><input value={token} onChange={e => setToken(e.target.value)} type="text" placeholder="Token" /></p>
+                        <p>
+                          <input value={token} onChange={e => setToken(e.target.value)} type="text" placeholder="Token" />
+                        </p>
                         <p><input value={gasPassAmount} onChange={e => setGasPassAmount(e.target.value)} type="text" placeholder="Gas Pass Amount" /></p>
                       </Fragment>
                     )}
@@ -200,6 +226,12 @@ export default function Sender({ title }) {
                   </Fragment>
                 )}
               </Fragment>
+            )}
+            {txHash && (
+              <div>
+                <p><br />Your transaction:</p>
+                <a href={"https://goerli.lineascan.build/tx/" + txHash} target="_blank" style={{ textDecoration: 'underline' }}>{"https://goerli.lineascan.build/tx/" + txHash}</a>
+              </div>
             )}
           </div>
         </div>

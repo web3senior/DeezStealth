@@ -21,6 +21,9 @@ export default function Receiver({ title }) {
   const [privateKey, setPrivateKey] = useState('')
   const [sharedSecret, setSharedSecret] = useState('')
 
+  const [stealthPrivateKey, setStealthPrivateKey] = useState('')
+  const [stealthAddress, setStealthAddress] = useState('')
+
   useEffect(() => {
     const provider = new ethers.BrowserProvider(window.ethereum)
     provider.getSigner().then(signer => {
@@ -45,7 +48,8 @@ export default function Receiver({ title }) {
     }
     const stealthPrivateKey = getStealthPrivateKey(privateKey, sharedSecret)
     const wallet = new ethers.Wallet(stealthPrivateKey)
-    alert("Your private key: " + stealthPrivateKey + "\n\nYour stealth address: " + wallet.address)
+    setStealthPrivateKey(stealthPrivateKey)
+    setStealthAddress(wallet.address)
   }
 
   const handleSubmitPubKey = async () => {
@@ -115,8 +119,10 @@ export default function Receiver({ title }) {
                 ) : (
                   <Fragment>
                     <h3>Public Key</h3>
-                    <p>{publicKey} [copy]</p>
-                    <p><button onClick={handleRemovePubKey} disabled={isRemoving}>{isRemoving ? 'Removing...' : 'Remove'}</button></p>
+                    <p><input type="text" disabled value={publicKey} /></p>
+                    <p style={{ marginTop: '10px' }}>
+                      <button onClick={handleRemovePubKey} disabled={isRemoving}>{isRemoving ? 'Removing...' : 'Remove'}</button>
+                    </p>
                   </Fragment>
                 )}
               </Fragment>
@@ -124,9 +130,16 @@ export default function Receiver({ title }) {
 
             <p>&nbsp;</p>
             <h3>Generate Stealth Private Key</h3>
-            <p><input type="text" placeholder="Shared Secret starting with 0x" value={sharedSecret} onChange={e => setSharedSecret(e.target.value)} /></p>
-            <p><input type="text" placeholder="Private Key starting with 0x" value={privateKey} onChange={e => setPrivateKey(e.target.value)} /></p>
-            <p><button onClick={handleGenerate}>Generate</button></p>
+            <p style={{ marginTop: '10px' }}><input type="text" placeholder="Shared Secret starting with 0x" value={sharedSecret} onChange={e => setSharedSecret(e.target.value)} /></p>
+            <p style={{ marginTop: '10px' }}><input type="text" placeholder="Private Key starting with 0x" value={privateKey} onChange={e => setPrivateKey(e.target.value)} /></p>
+            <p style={{ marginTop: '10px' }}><button onClick={handleGenerate}>Generate</button></p>
+            <br />
+            {stealthPrivateKey && (
+              <div>
+                <p><b>Your stealth private key:</b> {stealthPrivateKey}</p>
+                <p><b>Your stealth address:</b> {stealthAddress}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

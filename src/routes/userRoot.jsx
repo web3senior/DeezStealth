@@ -26,7 +26,7 @@ export default function UserRoot(props) {
     <>
       <Toaster />
       <header className={`${styles.header} d-flex justify-content-between`}>
-        <figure>
+        <figure className='animate__animated animate__fadeIn'>
           <img alt="logo" src={Logo} />
           <figcaption>{import.meta.env.VITE_TITLE}</figcaption>
         </figure>

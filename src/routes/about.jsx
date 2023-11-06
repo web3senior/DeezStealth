@@ -48,22 +48,18 @@ export default function About({ title }) {
       <Heading title={title} />
       <div className={`__container ms-motion-slideUpIn ${styles.container}`} data-width={`large`}>
         <div className={`card ms-depth-4 text-justify`}>
-        <div className='card__header'>
-          <h4>About Us</h4>
+          <div className="card__header">
+            <h4>About Us</h4>
           </div>
           <div className="card__body">
-            <p>
-              Ever wanted to make some batch token transfers WHILE remaining private? Well know thanks to 🥷DeezStealth you can!
-            </p>
-            <p>
-              
-            </p>
+            <p>Ever wanted to make some batch token transfers WHILE remaining private? Well know thanks to 🥷DeezStealth you can!</p>
+            <p></p>
           </div>
         </div>
 
         <div className={`card ms-depth-4 text-justify mt-20`}>
-        <div className='card__header'>
-          <h4>FAQ</h4>
+          <div className="card__header">
+            <h4>FAQ</h4>
           </div>
           <div className="card__body">
             <ul>
@@ -78,10 +74,11 @@ export default function About({ title }) {
                 )
               })}
             </ul>
+            <br />
             <p>Got a feature request or found a bug?</p>
-            <PopupButton id="NELvlnrQ" style={{ fontSize: 20 }} className="feedback-button text-justify">
-      Provide Feedback
-    </PopupButton>
+            <PopupButton id="NELvlnrQ" style={{ fontSize: 18,display:'inline',padding: '0 1rem'}} className="animate__animated animate__backInUp feedback-button text-justify btn" >
+              Provide Feedback
+            </PopupButton>
           </div>
         </div>
 
@@ -100,7 +97,7 @@ export default function About({ title }) {
 
                     <b>{item.fullname}</b>
 
-                    <a href={`https://github.com/${item.username}`} target="_blank"  rel="noreferrer">
+                    <a href={`https://github.com/${item.username}`} target="_blank" rel="noreferrer">
                       <img alt="GitHub Icon" src={GitHubIcon} />
                     </a>
                   </li>

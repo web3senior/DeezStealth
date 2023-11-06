@@ -39,12 +39,12 @@ export default function Dashboard({ title }) {
       <div className={`__container ms-motion-slideUpIn`} data-width={`large`}>
         <ul className={`d-flex align-items-center justify-content-around ${styles.tab}`}>
           <li>
-            <button onClick={() => setOpenTab(`token`)} style={{ background: openTab === 'token' ? 'var(--color-tab-active)' : '' }}>
+            <button onClick={() => setOpenTab(`token`)} style={{ background: openTab === 'token' ? '#eee' : '' }}>
               Token
             </button>
           </li>
           <li>
-            <button onClick={() => setOpenTab(`transaction`)} style={{ background: openTab === 'transaction' ? 'var(--color-tab-active)' : '' }}>
+            <button onClick={() => setOpenTab(`transaction`)} style={{ background: openTab === 'transaction' ? '#eee' : '' }}>
               Transaction
             </button>
           </li>

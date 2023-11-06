@@ -197,7 +197,7 @@ export default function Sender({ title }) {
                 ) : (
                   <Fragment>
                     <p><b>{receivers.length} stealth accounts generated</b></p>
-                    <p><button onClick={handleExport}>🥷 Export stealth CSV</button></p>
+                    <p><button onClick={handleExport} className="btn" style={{ backgroundColor: 'black' }}>🥷 Export stealth CSV</button></p>
                   </Fragment>
                 )}
 
@@ -208,10 +208,10 @@ export default function Sender({ title }) {
                         style={{ float: 'left', width: '30px', marginTop: '-6px', marginRight: '6px' }} />
                       Distribute Ethereum
                     </p>
-                    <p><input value={amount} onChange={e => setAmount(e.target.value)} type="text" placeholder="Amount" /></p>
+                    <p style={{ marginBottom: "0.5rem" }}><input value={amount} onChange={e => setAmount(e.target.value)} type="text" placeholder="Amount" /></p>
                     {!isETH && (
                       <Fragment>
-                        <p>
+                        <p style={{ marginBottom: "0.5rem"}}>
                           <input value={token} onChange={e => setToken(e.target.value)} type="text" placeholder="Token Address" />
                         </p>
                         <p><input value={gasPassAmount} onChange={e => setGasPassAmount(e.target.value)} type="text" placeholder="Gas Pass Amount" /></p>
@@ -219,7 +219,7 @@ export default function Sender({ title }) {
                     )}
                     <p>
                       <br />
-                      <button onClick={handleReset}>Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button onClick={handleReset} style={{ color: 'white' }}>Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
                       <button onClick={handleDistribute} className='btn' type="submit" disabled={!isReadyToDistribute}>
                         {isDistributing ? 'Distributing...' : 'Distribute'}
                       </button>

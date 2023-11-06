@@ -30,7 +30,7 @@ function Welcome({ title }) {
 
   return (
     <section className={styles.section}>
-      <figure style={{ width: '240px' }}>
+      <figure>
         <DeezStealthSVG />
       </figure>
       <div>

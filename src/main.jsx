@@ -47,14 +47,14 @@ const router = createBrowserRouter([
                 checkInstallationImmediately: false,
               }}
             >
-              <Welcome title={`welcome`} />
+              <Welcome title={`Welcome`} />
             </MetaMaskUIProvider>
           </>
         ),
       },
       {
         path: 'about',
-        element: <About title={`about us`} />,
+        element: <About title={`About Us`} />,
       },
       {
         path: 'setting',
@@ -76,17 +76,17 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Dashboard to={`dashboard`} />,
+            element: <Dashboard title='Dashboard' to={`dashboard`} />,
           },
           {
             path: 'sender',
             loader: () => [],
-            element: <Sender to={`sender`} />,
+            element: <Sender title='Sender' to={`sender`} />,
           },
           {
             path: 'receiver',
             loader: () => [],
-            element: <Receiver to={`receiver`} />,
+            element: <Receiver title='Receiver' to={`receiver`} />,
           },
         ],
       },

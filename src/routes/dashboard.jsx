@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useLoaderData, defer } from 'react-router-dom'
+import { ethers } from 'ethers'
+import _ from 'lodash'
 import { Title } from './helper/DocumentTitle'
 import { getTokens, getTransaction } from './../util/decommas'
 import styles from './Dashboard.module.scss'
-import Loading from './../routes/components/LoadingSpinner'
 import DefaultIcon from './../assets/default-token-icon.png'
 
 export default function Dashboard({ title }) {
@@ -24,7 +24,13 @@ export default function Dashboard({ title }) {
 
       getTokens(address[0]).then((res) => {
         console.log('Tokens => ', res)
-        setERC20tokens(res.result)
+        const grouped = _.groupBy(res.result, 'chain_name')
+        const categoryToAppearFirst = 'linea'
+        const ordered = {
+          [categoryToAppearFirst]: grouped[categoryToAppearFirst] || [],
+          ..._.omit(grouped, categoryToAppearFirst)
+        }
+        setERC20tokens(ordered)
       })
 
       getTransaction(address[0]).then((res) => {
@@ -50,28 +56,33 @@ export default function Dashboard({ title }) {
           </li>
         </ul>
 
-        {openTab === 'token' && ERC20tokens && ERC20tokens.length > 0 && (
+        {openTab === 'token' && ERC20tokens && (
           <>
-            {ERC20tokens.map((item, i) => {
-              return (
-                <div className={`card ${styles.token}`} key={i}>
-                  <div className="card__body">
-                    <ul className="d-flex align-items-center justify-content-start">
-                      <li>
-                        <figure>
-                          <img src={item.logo_url !== null ? item.logo_url : DefaultIcon} alt={`${item.name} Icon`} />
-                        </figure>
-                      </li>
-                      <li>
-                        {item.name}
-                        <br />
-                        {item.amount}({item.symbol})
-                      </li>
-                    </ul>
+            {Object.keys(ERC20tokens).map((chain_name) => (
+              <div style={{ marginBottom: '2rem' }}>
+                <h3>{chain_name}</h3>
+                {!ERC20tokens[chain_name].length && 'You have no tokens on Linea network available for distribution.'}
+                {ERC20tokens[chain_name].map((item, i) => (
+                  <div className={`card ${styles.token}`} key={i}>
+                    <div className="card__body">
+                      <ul className="d-flex align-items-center justify-content-start">
+                        <li>
+                          <figure>
+                            <img src={item.logo_url !== null ? item.logo_url : DefaultIcon} alt={`${item.name} Icon`} />
+                          </figure>
+                        </li>
+                        <li>
+                          <b>{item.name}</b>
+                          <br />
+                          {ethers.formatUnits(item.amount, item.decimals)} ({item.symbol})
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              )
-            })}
+                ))}
+              </div>
+            )
+            )}
           </>
         )}
 

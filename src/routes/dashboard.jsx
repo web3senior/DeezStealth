@@ -40,6 +40,15 @@ export default function Dashboard({ title }) {
     })
   }, [])
 
+  // function copy(text) {
+  //   navigator.clipboard.writeText(text).then(() => {
+  //     alert("successfully copied")
+  //   })
+  //   .catch(() => {
+  //     alert("something went wrong")
+  //   })
+  // }
+
   return (
     <section className={styles.section}>
       <div className={`__container ms-motion-slideUpIn`} data-width={`large`}>
@@ -75,6 +84,12 @@ export default function Dashboard({ title }) {
                           <b>{item.name}</b>
                           <br />
                           {ethers.formatUnits(item.amount, item.decimals)} ({item.symbol})
+                          <br />
+                          <i>{(item.actual_price * ethers.formatUnits(item.amount, item.decimals)).toFixed(2)}$</i><br />
+                          <p style={{ fontSize: '0.7rem' }}>{item.address}</p>
+                          {/* <input type="text" value={item.address} disabled /><br /> */}
+                          {/* {item.address.substring(0, 6)}...{item.address.substring(item.address.length - 6)}&nbsp;
+                          <a onClick={() => { copy(item.address) }}>Copy</a> */}
                         </li>
                       </ul>
                     </div>

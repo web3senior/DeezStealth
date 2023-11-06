@@ -84,6 +84,11 @@ a.active {
   width: 100%;
 }
 
+.min-w-100 {
+  min-width: 100% !important;
+  height: 5rem !important;
+}
+
 table {
   border-collapse: collapse;
   background-color: #fff;

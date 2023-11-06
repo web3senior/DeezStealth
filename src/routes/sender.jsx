@@ -175,8 +175,8 @@ export default function Sender({ title }) {
 
   return (
     <section className={styles.section}>
-      <div className={`__container ms-motion-slideUpIn`} data-width={`large`}>
-        <div className={`card ms-depth-4 text-justify`}>
+      <div className={`__container ms-motion-slideUpIn w-100`} data-width={`large`}>
+        <div className={`card ms-depth-4 text-justify w-100`}>
           <div className='card__body'>
             <h1>Distribute</h1>
             <FileUploader
@@ -184,6 +184,7 @@ export default function Sender({ title }) {
               handleChange={handleChange}
               name='file'
               types={fileTypes}
+              classes="min-w-100"
             />
             <p>{file ? `File name: ${file.name}` : 'no files uploaded yet'}</p>
               <p><a href="javascript:void()" onClick={handleExample} style={{ textDecoration: 'underline' }}>Download Example CSV</a>
@@ -196,7 +197,7 @@ export default function Sender({ title }) {
                 ) : (
                   <Fragment>
                     <p><b>{receivers.length} stealth accounts generated</b></p>
-                    <p><button onClick={handleExport}>🥷 Export stealth CSV</button></p>
+                    <p><button onClick={handleExport} className="btn" style={{ backgroundColor: 'black' }}>🥷 Export stealth CSV</button></p>
                   </Fragment>
                 )}
 
@@ -207,10 +208,10 @@ export default function Sender({ title }) {
                         style={{ float: 'left', width: '30px', marginTop: '-6px', marginRight: '6px' }} />
                       Distribute Ethereum
                     </p>
-                    <p><input value={amount} onChange={e => setAmount(e.target.value)} type="text" placeholder="Amount" /></p>
+                    <p style={{ marginBottom: "0.5rem" }}><input value={amount} onChange={e => setAmount(e.target.value)} type="text" placeholder="Amount" /></p>
                     {!isETH && (
                       <Fragment>
-                        <p>
+                        <p style={{ marginBottom: "0.5rem"}}>
                           <input value={token} onChange={e => setToken(e.target.value)} type="text" placeholder="Token Address" />
                         </p>
                         <p><input value={gasPassAmount} onChange={e => setGasPassAmount(e.target.value)} type="text" placeholder="Gas Pass Amount" /></p>
@@ -218,8 +219,8 @@ export default function Sender({ title }) {
                     )}
                     <p>
                       <br />
-                      <button onClick={handleReset}>Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <button onClick={handleDistribute} type="submit" disabled={!isReadyToDistribute}>
+                      <button onClick={handleReset} style={{ color: 'white' }}>Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button onClick={handleDistribute} className='btn' type="submit" disabled={!isReadyToDistribute}>
                         {isDistributing ? 'Distributing...' : 'Distribute'}
                       </button>
                     </p>

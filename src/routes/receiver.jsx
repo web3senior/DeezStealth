@@ -121,7 +121,7 @@ export default function Receiver({ title }) {
                     <h3>Public Key</h3>
                     <p><input type="text" disabled value={publicKey} /></p>
                     <p style={{ marginTop: '10px' }}>
-                      <button onClick={handleRemovePubKey} disabled={isRemoving}>{isRemoving ? 'Removing...' : 'Remove'}</button>
+                      <button onClick={handleRemovePubKey} className='btn' disabled={isRemoving}>{isRemoving ? 'Removing...' : 'Remove'}</button>
                     </p>
                   </Fragment>
                 )}

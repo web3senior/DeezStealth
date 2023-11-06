@@ -17,6 +17,8 @@
   figure {
     position: relative;
     overflow: hidden;
+    width: 240px;
+    margin-bottom: -1rem;
 
     &:after {
       --extra-size: 100px;
@@ -61,7 +63,7 @@
   }
 
   p {
-    min-height: 100px;
+    min-height: 50px;
     line-height: 1.2;
     text-wrap: balance;
   }
@@ -149,6 +151,7 @@
   position: fixed;
   bottom: 1rem;
   left: 50%;
+  width: 100%;
   transform: translateX(-50%);
   color: var(--primary-color);
   font-size: 0.8rem;

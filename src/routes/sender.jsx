@@ -175,8 +175,8 @@ export default function Sender({ title }) {
 
   return (
     <section className={styles.section}>
-      <div className={`__container ms-motion-slideUpIn`} data-width={`large`}>
-        <div className={`card ms-depth-4 text-justify`}>
+      <div className={`__container ms-motion-slideUpIn w-100`} data-width={`large`}>
+        <div className={`card ms-depth-4 text-justify w-100`}>
           <div className='card__body'>
             <h1>Distribute</h1>
             <FileUploader
@@ -184,6 +184,7 @@ export default function Sender({ title }) {
               handleChange={handleChange}
               name='file'
               types={fileTypes}
+              classes="min-w-100"
             />
             <p>{file ? `File name: ${file.name}` : 'no files uploaded yet'}</p>
               <p><a href="javascript:void()" onClick={handleExample} style={{ textDecoration: 'underline' }}>Download Example CSV</a>
@@ -219,7 +220,7 @@ export default function Sender({ title }) {
                     <p>
                       <br />
                       <button onClick={handleReset}>Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <button onClick={handleDistribute} type="submit" disabled={!isReadyToDistribute}>
+                      <button onClick={handleDistribute} className='btn' type="submit" disabled={!isReadyToDistribute}>
                         {isDistributing ? 'Distributing...' : 'Distribute'}
                       </button>
                     </p>

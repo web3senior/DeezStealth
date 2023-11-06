@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useLoaderData, defer } from 'react-router-dom'
+import { ethers } from 'ethers'
 import { Title } from './helper/DocumentTitle'
 import { getTokens, getTransaction } from './../util/decommas'
 import styles from './Dashboard.module.scss'
-import Loading from './../routes/components/LoadingSpinner'
 import DefaultIcon from './../assets/default-token-icon.png'
 
 export default function Dashboard({ title }) {
@@ -63,9 +62,9 @@ export default function Dashboard({ title }) {
                         </figure>
                       </li>
                       <li>
-                        {item.name}
+                        <b>{item.name}</b> ({item.chain_name})
                         <br />
-                        {item.amount}({item.symbol})
+                        {ethers.formatUnits(item.amount, item.decimals)} ({item.symbol})
                       </li>
                     </ul>
                   </div>

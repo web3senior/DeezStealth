@@ -72,4 +72,4 @@ The DeezStealth.sol contract is deployed and verified on to Linea Goerli [here](
 
 ### Special Thanks
 
-A special thanks to [devorsmth.eth](https://app.buidlguidl.com/builders/0x02d09E69e528d7DA14F32Cd21b55aFFa1FF7F873) and his build [stAdds](https://stadds.vercel.app/) which served as the inspiration for our dapp and to learn more about [EIP-5664 Stealth Addresses](https://vitalik.ca/general/2023/01/20/stealth.html)
+A special thanks to [devorsmth.eth](https://app.buidlguidl.com/builders/0xABD10F0A61270D6977c5bFD9d4ec74d6D3bc96ab) and his build [stAdds](https://stadds.vercel.app/) which served as the inspiration for our dapp and to learn more about [EIP-5664 Stealth Addresses](https://vitalik.ca/general/2023/01/20/stealth.html)

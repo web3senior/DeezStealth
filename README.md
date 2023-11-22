@@ -12,6 +12,7 @@
 <h2>About DeezStealth</h2>
 
 ![ninja](/src/assets/logo.png)
+![buildHACKS](/src/assets/buildHACKS.png)
 </div>
 
 This repo contains the code for a project submission for BuildHACKS Hackathon on [buidlbox.io](https://app.buidlbox.io/buidlbox/buidlhacks) which ended Nov. 5th 2023

@@ -9,8 +9,10 @@
 <br>
 
 <div align="center">
+
 ![ninja](/src/assets/logo.png)
 <div/>
+
 
 ![buildHACKS](/src/assets/buildHACKS.png)
 

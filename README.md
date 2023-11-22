@@ -10,7 +10,7 @@
 
 <div align="center">
 
-![ninja](/src/assets/logo.png)
+
 ![buildHACKS](/src/assets/buildHACKS.png)
 </div>
 
@@ -23,6 +23,8 @@
 This repo contains the code for a project submission for BuildHACKS Hackathon on [buidlbox.io](https://app.buidlbox.io/buidlbox/buidlhacks) which ended Nov. 5th 2023
 
 DeezStealth is a dapp that allows users to create batch send transactions leveraging [EIP5664 Stealth Addresses](https://eips.ethereum.org/EIPS/eip-5564) on Linea Blockchain.
+
+![ninja](/src/assets/logo.png)
 
 ## Features
 

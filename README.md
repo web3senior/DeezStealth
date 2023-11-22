@@ -11,9 +11,10 @@
 <div align="center">
 
 ![ninja](/src/assets/logo.png)
+![buildHACKS](/src/assets/buildHACKS.png)
 </div>
 
-![buildHACKS](/src/assets/buildHACKS.png)
+
 
 <div align="center">
     <h2>About DeezStealth</h2>

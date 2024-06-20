@@ -68,7 +68,9 @@ The DeezStealth.sol contract is deployed and verified on to Linea Goerli [here](
 
 - [web3senior](https://github.com/web3senior)
 - [bshevchenko](https://github.com/bshevchenko)
-- [tantodefi](https://github.com/tantodefi)
+
+### Wallet address
+- @web3senior - 0x20e229667Cec8A0e9D3C6Fb89693B2a44ec2C50e
 
 ### Special Thanks
 
